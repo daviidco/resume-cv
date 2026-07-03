@@ -1,0 +1,461 @@
+---
+interface Props {
+	theme?: 'light' | 'dark';
+}
+
+const { theme = 'light' } = Astro.props;
+
+const MAP_LAT = 1.2136;
+const MAP_LON = -77.2811;
+---
+
+<section id="contact" class={`contact-section ${theme}`}>
+	<div class="shape-bottom">
+		<div class="block-title">
+			<div class="container-medium">
+				<h2>Contact</h2>
+				<div class="title-icon"><i class="fa fa-envelope-o"></i></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="contact-area">
+		<div class="form-contact-area">
+			<div class="inner-contact">
+				<ul class="contact-tabs" role="tablist">
+					<li class="active" data-tab="tab-contact">Contact Me</li>
+					<li data-tab="tab-hire">Hire Me</li>
+				</ul>
+
+				<div class="tab-content">
+					<form id="tab-contact" class="tab-pane active" data-form="contact">
+						<div class="form-group">
+							<label for="fullname">Your Name (*)</label>
+							<input type="text" id="fullname" class="form-flat" name="fullname" required />
+						</div>
+						<div class="form-group">
+							<label for="email">Email (*)</label>
+							<input type="email" id="email" class="form-flat" name="email" required />
+						</div>
+						<div class="form-group">
+							<label for="message">Your Message (*)</label>
+							<textarea id="message" class="form-flat" name="message" rows="8" required></textarea>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn-solid">Send Message</button>
+						</div>
+						<p class="form-status" hidden></p>
+					</form>
+
+					<form id="tab-hire" class="tab-pane" data-form="hire">
+						<div class="form-group">
+							<label for="hire-fullname">Your Name (*)</label>
+							<input type="text" id="hire-fullname" class="form-flat" name="fullname" required />
+						</div>
+						<div class="form-group">
+							<label for="hire-email">Email (*)</label>
+							<input type="email" id="hire-email" class="form-flat" name="email" required />
+						</div>
+						<div class="form-group">
+							<label for="hire-message">Short Description About the Project (*)</label>
+							<textarea id="hire-message" class="form-flat" name="message" rows="8" required></textarea>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn-solid">Send Request</button>
+						</div>
+						<p class="form-status" hidden></p>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="map-area">
+			<button type="button" class="map-overlay" aria-label="Click to interact with the map">
+				<span><i class="fa fa-map-marker"></i> Click to interact with the map</span>
+			</button>
+			<div id="leaflet-map" data-lat={MAP_LAT} data-lon={MAP_LON}></div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.contact-section {
+		position: relative;
+		z-index: 1;
+	}
+
+	.contact-section.light {
+		background: #ffffff;
+	}
+
+	.contact-section.dark {
+		background: #323232;
+	}
+
+	.container-medium {
+		max-width: 960px;
+		margin: 0 auto;
+		padding: 0 15px;
+		position: relative;
+	}
+
+	.shape-bottom {
+		position: relative;
+	}
+
+	.shape-bottom:before {
+		content: '';
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		z-index: 1;
+		bottom: -10px;
+		left: 50%;
+		margin-left: -10px;
+		transform: rotate(45deg);
+		border: 1px solid #ebebeb;
+	}
+
+	.contact-section.light .shape-bottom:before {
+		background: #f5f5f5;
+	}
+
+	.contact-section.dark .shape-bottom:before {
+		background: #282828;
+		border-color: #1e1e1e;
+	}
+
+	.block-title {
+		padding: 40px 0;
+		text-align: center;
+		border-top: 1px solid #ebebeb;
+		border-bottom: 1px solid #ebebeb;
+	}
+
+	.contact-section.dark .block-title {
+		border-color: #1e1e1e;
+	}
+
+	.contact-section.light .block-title {
+		background: #f5f5f5;
+	}
+
+	.contact-section.dark .block-title {
+		background: #282828;
+	}
+
+	.block-title h2 {
+		display: inline-block;
+		margin: 0;
+		text-transform: uppercase;
+	}
+
+	.contact-section.light .block-title h2 {
+		color: #000000;
+	}
+
+	.contact-section.dark .block-title h2 {
+		color: #ffffff;
+	}
+
+	.title-icon {
+		display: block;
+		margin-top: 10px;
+		font-size: 18px;
+		color: #7d7d7d;
+	}
+
+	.contact-section.dark .title-icon {
+		color: #919191;
+	}
+
+	/* == layout == */
+	.contact-area {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.form-contact-area {
+		flex: 1 1 480px;
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	.inner-contact {
+		width: 100%;
+		max-width: 470px;
+		padding: 60px 40px;
+	}
+
+	.map-area {
+		flex: 1 1 480px;
+		position: relative;
+		border-left: 1px solid #ebebeb;
+		min-height: 400px;
+	}
+
+	.contact-section.dark .map-area {
+		border-color: #1e1e1e;
+	}
+
+	#leaflet-map {
+		width: 100%;
+		height: 100%;
+		min-height: 400px;
+		filter: grayscale(0.3);
+	}
+
+	.contact-section.dark #leaflet-map {
+		filter: grayscale(0.5) invert(0.9) hue-rotate(180deg);
+	}
+
+	.map-overlay {
+		position: absolute;
+		inset: 0;
+		z-index: 2;
+		background: rgba(255, 255, 255, 0.7);
+		border: 0;
+		cursor: pointer;
+		font-family: inherit;
+		color: #000000;
+		text-transform: uppercase;
+		font-size: 12px;
+		font-weight: 700;
+		letter-spacing: 1px;
+		transition: opacity 0.3s ease;
+	}
+
+	.contact-section.dark .map-overlay {
+		background: rgba(30, 30, 30, 0.75);
+		color: #ffffff;
+	}
+
+	.map-overlay.hidden {
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	@media (max-width: 900px) {
+		.form-contact-area {
+			justify-content: center;
+		}
+		.map-area {
+			border-left: 0;
+			flex-basis: 100%;
+		}
+	}
+
+	/* == tabs == */
+	.contact-tabs {
+		list-style: none;
+		display: flex;
+		gap: 4px;
+		margin: 0;
+		padding: 15px 10px 0;
+		background: #f5f5f5;
+		border: 1px solid #ebebeb;
+		border-bottom: 0;
+	}
+
+	.contact-section.dark .contact-tabs {
+		background: #282828;
+		border-color: #1e1e1e;
+	}
+
+	.contact-tabs li {
+		padding: 10px 15px;
+		cursor: pointer;
+		font-size: 13px;
+		text-transform: uppercase;
+		font-weight: 700;
+		letter-spacing: 0.5px;
+	}
+
+	.contact-section.light .contact-tabs li {
+		color: #000000;
+	}
+
+	.contact-section.dark .contact-tabs li {
+		color: #ffffff;
+	}
+
+	.contact-tabs li.active {
+		box-shadow: 0 -2px 0 #000000 inset;
+	}
+
+	.contact-section.dark .contact-tabs li.active {
+		box-shadow: 0 -2px 0 #ffffff inset;
+	}
+
+	.tab-content {
+		padding-top: 20px;
+	}
+
+	.tab-pane {
+		display: none;
+	}
+
+	.tab-pane.active {
+		display: block;
+	}
+
+	/* == form == */
+	.form-group {
+		margin-bottom: 15px;
+	}
+
+	.form-group label {
+		display: block;
+		margin-bottom: 8px;
+		font-size: 13px;
+	}
+
+	.contact-section.light .form-group label {
+		color: #000000;
+	}
+
+	.contact-section.dark .form-group label {
+		color: #ffffff;
+	}
+
+	.form-flat {
+		width: 100%;
+		box-sizing: border-box;
+		height: 45px;
+		padding: 10px 12px;
+		font-family: 'Open Sans', sans-serif;
+		font-size: 13px;
+		border: 1px solid #ebebeb;
+		border-radius: 0;
+		background: transparent;
+		color: inherit;
+	}
+
+	textarea.form-flat {
+		height: auto;
+	}
+
+	.contact-section.dark .form-flat {
+		border-color: #1e1e1e;
+		color: #ffffff;
+	}
+
+	.form-flat:focus {
+		outline: none;
+		border-color: #c3c3c3;
+	}
+
+	.btn-solid {
+		min-width: 151px;
+		padding: 13px;
+		font-weight: 700;
+		text-transform: uppercase;
+		font-size: 12px;
+		letter-spacing: 1px;
+		border: 0;
+		cursor: pointer;
+		color: #ffffff;
+		background: #323232;
+		transition: background 0.3s ease;
+	}
+
+	.btn-solid:hover {
+		background: #000000;
+	}
+
+	.contact-section.dark .btn-solid {
+		background: #ffffff;
+		color: #1e1e1e;
+	}
+
+	.contact-section.dark .btn-solid:hover {
+		background: #ebebeb;
+	}
+
+	.form-status {
+		font-size: 13px;
+	}
+</style>
+
+<script>
+	function initContactTabs() {
+		document.querySelectorAll<HTMLElement>('.contact-tabs').forEach((tabs) => {
+			const items = Array.from(tabs.querySelectorAll<HTMLLIElement>('li'));
+			const panes = tabs
+				.closest('.inner-contact')
+				?.querySelectorAll<HTMLElement>('.tab-pane');
+			if (!panes) return;
+
+			items.forEach((item) => {
+				item.addEventListener('click', () => {
+					const targetId = item.dataset.tab;
+					items.forEach((i) => i.classList.toggle('active', i === item));
+					panes.forEach((pane) => pane.classList.toggle('active', pane.id === targetId));
+				});
+			});
+		});
+	}
+
+	function initContactForms() {
+		document.querySelectorAll<HTMLFormElement>('form[data-form]').forEach((form) => {
+			form.addEventListener('submit', (e) => {
+				e.preventDefault();
+				const status = form.querySelector<HTMLElement>('.form-status');
+				if (status) {
+					status.hidden = false;
+					status.textContent = "Thanks! This form isn't wired to a backend yet, but your message would be sent from here.";
+				}
+			});
+		});
+	}
+
+	let leafletLoading: Promise<void> | null = null;
+
+	function loadLeaflet(): Promise<void> {
+		if ((window as any).L) return Promise.resolve();
+		if (leafletLoading) return leafletLoading;
+
+		leafletLoading = new Promise((resolve) => {
+			const link = document.createElement('link');
+			link.rel = 'stylesheet';
+			link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+			document.head.appendChild(link);
+
+			const script = document.createElement('script');
+			script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+			script.onload = () => resolve();
+			document.head.appendChild(script);
+		});
+
+		return leafletLoading;
+	}
+
+	async function initMap() {
+		const mapEl = document.getElementById('leaflet-map');
+		const overlay = document.querySelector<HTMLButtonElement>('.map-overlay');
+		if (!mapEl) return;
+
+		const lat = Number(mapEl.dataset.lat);
+		const lon = Number(mapEl.dataset.lon);
+
+		await loadLeaflet();
+		const L = (window as any).L;
+
+		const map = L.map(mapEl, { scrollWheelZoom: false }).setView([lat, lon], 13);
+		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+			maxZoom: 19,
+		}).addTo(map);
+		L.marker([lat, lon]).addTo(map).bindPopup('Pasto, Nariño, Colombia');
+
+		overlay?.addEventListener('click', () => {
+			overlay.classList.add('hidden');
+			map.scrollWheelZoom.enable();
+			map.invalidateSize();
+		});
+	}
+
+	initContactTabs();
+	initContactForms();
+	initMap();
+</script>

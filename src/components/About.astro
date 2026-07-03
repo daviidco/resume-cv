@@ -1,0 +1,321 @@
+---
+interface Props {
+  theme?: "light" | "dark";
+}
+
+const { theme = "light" } = Astro.props;
+---
+
+<section id="about" class={`about-section ${theme}`}>
+  <div class="my-profile">
+    <div class="my-pict">
+      <div class="overfly">
+        <div class="text-bottom">
+          <h2>Paulo Cordoba</h2>
+          <h5>Software Engineer</h5>
+        </div>
+      </div>
+    </div>
+    <div class="my-desc">
+      <div class="panel-light">
+        <div class="inner-text">
+          <h3>Hello There!</h3>
+          <p>
+            I discovered my passion for design when I was a sophomore in High
+            School; It was then when it became clear what I wanted to do for a
+            living. I pursued my career at the amazing Valencia College where I
+            started my major in Print Design. A year later I took a begginer’s
+            Web class, where I discovered the love for code. After that, I
+            switched my major to Interactive Design and started the never-ending
+            journey of becoming a web developer along with sharpening my eye for
+            design.
+          </p>
+          <p>
+            In 2013 eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, Ut enim ad minim veniam, quis nostrud
+            exercitation quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+      </div>
+      <div class="panel-dark">
+        <div class="inner-text">
+          <p class="contact-list">
+            <span
+              ><i class="fa fa-calendar"></i>
+              <strong>Birthdate</strong> : dd/mm/yyyy</span
+            >
+            <span
+              ><i class="fa fa-phone"></i>
+              <strong>Phone</strong> : +00 000 000 000</span
+            >
+            <span
+              ><i class="fa fa-envelope"></i>
+              <strong>Email</strong> : you@example.com</span
+            >
+            <span
+              ><i class="fa fa-globe"></i>
+              <strong>Website</strong> : www.example.com</span
+            >
+            <span
+              ><i class="fa fa-location-arrow"></i>
+              <strong>Address</strong> : City, Country</span
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <ul class="services">
+      <li>
+        <div class="ic"><i class="fa fa-code"></i></div>
+        <h5>Full-Stack Developer</h5>
+      </li>
+      <li>
+        <div class="ic"><i class="fa fa-lightbulb-o"></i></div>
+        <h5>Problem Solver</h5>
+      </li>
+      <li>
+        <div class="ic"><i class="fa fa-graduation-cap"></i></div>
+        <h5>Continuous Learner</h5>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .about-section {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .about-section.light {
+    background: #ffffff;
+  }
+
+  .about-section.dark {
+    background: #323232;
+  }
+
+  /* bootstrap .container defaults (original relies on Bootstrap 3.3.1) */
+  .container {
+    margin: 0 auto;
+    padding: 0 15px;
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    .container {
+      width: 750px;
+    }
+  }
+  @media (min-width: 992px) {
+    .container {
+      width: 970px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .container {
+      width: 1170px;
+    }
+  }
+
+  .my-profile {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+
+  .my-pict {
+    width: 50%;
+    min-height: 500px;
+    position: relative;
+    background-image: url("/images/hero-mountains.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .overfly {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .about-section.light .overfly {
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .about-section.dark .overfly {
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  .text-bottom {
+    padding: 40px;
+    text-align: right;
+  }
+
+  .text-bottom h2 {
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .text-bottom h5 {
+    margin: 6px 0 0;
+    text-transform: uppercase;
+    font-family: Georgia, serif;
+  }
+
+  .about-section.light .text-bottom {
+    color: #000000;
+  }
+
+  .about-section.dark .text-bottom {
+    color: #ffffff;
+  }
+
+  .my-desc {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .inner-text {
+    max-width: 585px;
+    padding: 40px;
+  }
+
+  .panel-light h3 {
+    margin-top: 0;
+  }
+
+  .about-section.light .panel-light {
+    background: #f5f5f5;
+  }
+
+  .about-section.dark .panel-light {
+    background: #282828;
+  }
+
+  .about-section.light .panel-light h3 {
+    color: #000000;
+  }
+
+  .about-section.dark .panel-light h3 {
+    color: #ffffff;
+  }
+
+  .panel-dark {
+    flex: 1;
+  }
+
+  .about-section.light .panel-dark {
+    background: #323232;
+  }
+
+  .about-section.dark .panel-dark {
+    background: #0a0a0a;
+  }
+
+  .contact-list {
+    margin: 0;
+    color: #ebebeb;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .contact-list i {
+    width: 20px;
+    display: inline-block;
+  }
+
+  .services {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+  }
+
+  .services li {
+    flex: 1 1 0;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 80px 0;
+    border-right: 1px solid #ebebeb;
+  }
+
+  .about-section.dark .services li {
+    border-right-color: #1e1e1e;
+  }
+
+  .services li:last-child {
+    border-right: 0;
+  }
+
+  .services .ic {
+    font-size: 25px;
+    line-height: 25px;
+    margin-bottom: 16px;
+  }
+
+  .services h5 {
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .about-section.light .services {
+    background: #ffffff;
+  }
+
+  .about-section.dark .services {
+    background: #323232;
+  }
+
+  .about-section.light .services .ic {
+    color: #7d7d7d;
+  }
+
+  .about-section.dark .services .ic {
+    color: #919191;
+  }
+
+  .about-section.light .services h5 {
+    color: #000000;
+  }
+
+  .about-section.dark .services h5 {
+    color: #ffffff;
+  }
+
+  @media (max-width: 880px) {
+    .my-pict,
+    .my-desc {
+      width: 100%;
+    }
+
+    .my-pict {
+      min-height: 300px;
+    }
+
+    .services li {
+      flex: 1 1 100%;
+      border-right: 0;
+      border-bottom: 1px solid #ebebeb;
+    }
+
+    .about-section.dark .services li {
+      border-bottom-color: #1e1e1e;
+    }
+
+    .services li:last-child {
+      border-bottom: 0;
+    }
+  }
+</style>

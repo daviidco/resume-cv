@@ -1,0 +1,642 @@
+---
+interface Props {
+	theme?: 'light' | 'dark';
+}
+
+const { theme = 'light' } = Astro.props;
+
+const employment = [
+	{
+		title: 'Software Engineer',
+		company: 'Company Name',
+		dates: '2023 - Present',
+		description:
+			'Building and maintaining full-stack features, collaborating with design and product to ship reliable, well-tested code.',
+	},
+	{
+		title: 'Backend Developer',
+		company: 'Company Name',
+		dates: '2021 - 2023',
+		description:
+			'Designed APIs and data models, improved performance across core services, and mentored newer teammates.',
+	},
+	{
+		title: 'Junior Developer',
+		company: 'Company Name',
+		dates: '2019 - 2021',
+		description:
+			'Started out fixing bugs and shipping small features, and grew into owning entire modules end to end.',
+	},
+];
+
+const education = [
+	{
+		title: 'B.Sc. Computer Science',
+		company: 'University Name',
+		dates: '2015 - 2019',
+		description:
+			'Focused on software engineering, algorithms, and databases, with hands-on project work throughout.',
+	},
+	{
+		title: 'Web Development Bootcamp',
+		company: 'Bootcamp Name',
+		dates: '2019',
+		description:
+			'Intensive program covering modern front-end and back-end development practices.',
+	},
+];
+
+const skills = [
+	{ label: 'JavaScript', percent: 90 },
+	{ label: 'TypeScript', percent: 85 },
+	{ label: 'Node.js', percent: 80 },
+	{ label: 'SQL', percent: 75 },
+];
+
+const moreSkillsLeft = [
+	{ label: 'Problem Solving', percent: 90 },
+	{ label: 'Teamwork', percent: 85 },
+	{ label: 'Communication', percent: 75 },
+];
+
+const moreSkillsRight = [
+	{ label: 'English', percent: 95 },
+	{ label: 'Spanish', percent: 100 },
+	{ label: 'French', percent: 40 },
+];
+---
+
+<section id="resume" class={`resume-section ${theme}`}>
+	<div class="shape-bottom">
+		<div class="block-title">
+			<div class="container-medium">
+				<h2>Employment</h2>
+				<div class="title-icon"><i class="fa fa-briefcase"></i></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-medium">
+		<ul class="list-timeline">
+			{
+				employment.map((job, i) => (
+					<li>
+						<div class="ic"><i class="fa fa-briefcase" /></div>
+						<div class="number">{String(i + 1).padStart(2, '0')}</div>
+						<div class="desc">
+							<h5>{job.title}</h5>
+							<p class="meta">{job.company}</p>
+							<p>{job.description}</p>
+							<p class="meta">{job.dates}</p>
+						</div>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+
+	<div class="shape-bottom">
+		<div class="block-title">
+			<div class="container-medium">
+				<h2>Education</h2>
+				<div class="title-icon"><i class="fa fa-graduation-cap"></i></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-medium">
+		<ul class="list-timeline">
+			{
+				education.map((edu, i) => (
+					<li>
+						<div class="ic"><i class="fa fa-graduation-cap" /></div>
+						<div class="number">{String(i + 1).padStart(2, '0')}</div>
+						<div class="desc">
+							<h5>{edu.title}</h5>
+							<p class="meta">{edu.company}</p>
+							<p>{edu.description}</p>
+							<p class="meta">{edu.dates}</p>
+						</div>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+
+	<div class="shape-bottom">
+		<div class="block-title">
+			<div class="container-medium">
+				<h2>Skills</h2>
+				<div class="title-icon"><i class="fa fa-magic"></i></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-medium">
+		<ul class="skill-charts">
+			{
+				skills.map((skill) => (
+					<li>
+						<div class="chart" style={`--percent: ${skill.percent}`}>
+							<span class="percent">{skill.percent}</span>
+						</div>
+						<div class="label">{skill.label}</div>
+					</li>
+				))
+			}
+		</ul>
+
+		<div class="title-border">
+			<h5>More Skills</h5>
+		</div>
+
+		<div class="more-skills">
+			<ul class="list-progress">
+				{
+					moreSkillsLeft.map((item) => (
+						<li>
+							<div class="title">
+								<span>{item.label}</span> <small>{item.percent}%</small>
+							</div>
+							<div class="progress-line">
+								<div class="line" style={`width: ${item.percent}%`} />
+							</div>
+						</li>
+					))
+				}
+			</ul>
+			<ul class="list-progress">
+				{
+					moreSkillsRight.map((item) => (
+						<li>
+							<div class="title">
+								<span>{item.label}</span> <small>{item.percent}%</small>
+							</div>
+							<div class="progress-line">
+								<div class="line" style={`width: ${item.percent}%`} />
+							</div>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</div>
+
+	<div class="cv-actions">
+		<a href="#" class="btn-outline"><i class="fa fa-download"></i> Download CV</a>
+		<a href="#" class="btn-outline print-btn"><i class="fa fa-print"></i> Print CV</a>
+	</div>
+</section>
+
+<style>
+	.resume-section {
+		position: relative;
+		z-index: 1;
+	}
+
+	.resume-section.light {
+		background: #ffffff;
+	}
+
+	.resume-section.dark {
+		background: #323232;
+	}
+
+	/* bootstrap .container-medium equivalent */
+	.container-medium {
+		max-width: 960px;
+		margin: 0 auto;
+		padding: 0 15px;
+		position: relative;
+	}
+
+	.shape-bottom {
+		position: relative;
+	}
+
+	.shape-bottom:before {
+		content: '';
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		z-index: 1;
+		bottom: -10px;
+		left: 50%;
+		margin-left: -10px;
+		transform: rotate(45deg);
+		border: 1px solid #ebebeb;
+	}
+
+	.resume-section.light .shape-bottom:before {
+		background: #f5f5f5;
+	}
+
+	.resume-section.dark .shape-bottom:before {
+		background: #282828;
+		border-color: #1e1e1e;
+	}
+
+	.block-title {
+		padding: 40px 0;
+		text-align: center;
+		border-top: 1px solid #ebebeb;
+		border-bottom: 1px solid #ebebeb;
+	}
+
+	.resume-section.dark .block-title {
+		border-color: #1e1e1e;
+	}
+
+	.resume-section.light .block-title {
+		background: #f5f5f5;
+	}
+
+	.resume-section.dark .block-title {
+		background: #282828;
+	}
+
+	.block-title h2 {
+		display: inline-block;
+		margin: 0;
+		text-transform: uppercase;
+	}
+
+	.resume-section.light .block-title h2 {
+		color: #000000;
+	}
+
+	.resume-section.dark .block-title h2 {
+		color: #ffffff;
+	}
+
+	.title-icon {
+		display: block;
+		margin-top: 10px;
+		font-size: 18px;
+		color: #7d7d7d;
+	}
+
+	.resume-section.dark .title-icon {
+		color: #919191;
+	}
+
+	/* == timeline (employment / education) == */
+	.list-timeline {
+		list-style: none;
+		margin: 0;
+		padding: 50px 0;
+		position: relative;
+	}
+
+	.list-timeline:before {
+		content: '';
+		position: absolute;
+		left: 50%;
+		top: 0;
+		bottom: 0;
+		width: 1px;
+		background: #ebebeb;
+	}
+
+	.resume-section.dark .list-timeline:before {
+		background: #1e1e1e;
+	}
+
+	.list-timeline li {
+		width: 50%;
+		box-sizing: border-box;
+		position: relative;
+		text-align: right;
+		padding-right: 50px;
+		margin-bottom: 10px;
+	}
+
+	.list-timeline li:nth-child(odd) {
+		margin-left: 50%;
+		text-align: left;
+		padding-right: 0;
+		padding-left: 50px;
+	}
+
+	.list-timeline li .ic {
+		position: absolute;
+		top: 20px;
+		width: 40px;
+		height: 40px;
+		line-height: 40px;
+		text-align: center;
+		background: #000000;
+		color: #ffffff;
+		right: 10px;
+	}
+
+	.resume-section.dark .list-timeline li .ic {
+		background: #ffffff;
+		color: #1e1e1e;
+	}
+
+	.list-timeline li:nth-child(odd) .ic {
+		right: auto;
+		left: 10px;
+	}
+
+	.list-timeline li .number {
+		position: absolute;
+		top: 10px;
+		right: -110px;
+		font-style: italic;
+		font-size: 60px;
+		line-height: 60px;
+		color: #ebebeb;
+	}
+
+	.resume-section.dark .list-timeline li .number {
+		color: #1e1e1e;
+	}
+
+	.list-timeline li:nth-child(odd) .number {
+		right: auto;
+		left: -110px;
+	}
+
+	.list-timeline li .desc {
+		padding: 20px;
+		border-top: 1px solid #ebebeb;
+		border-bottom: 1px solid #ebebeb;
+		position: relative;
+	}
+
+	.resume-section.dark .list-timeline li .desc {
+		border-color: #1e1e1e;
+	}
+
+	.list-timeline h5 {
+		margin: 0;
+		text-transform: uppercase;
+	}
+
+	.resume-section.light .list-timeline h5 {
+		color: #000000;
+	}
+
+	.resume-section.dark .list-timeline h5 {
+		color: #ffffff;
+	}
+
+	.list-timeline .meta {
+		margin: 0;
+		font-family: Georgia, serif;
+	}
+
+	.resume-section.light .list-timeline .meta {
+		color: #000000;
+	}
+
+	.resume-section.dark .list-timeline .meta {
+		color: #ffffff;
+	}
+
+	@media (max-width: 768px) {
+		.list-timeline:before {
+			left: 20px;
+		}
+		.list-timeline li,
+		.list-timeline li:nth-child(odd) {
+			width: 100%;
+			margin-left: 0;
+			text-align: left;
+			padding-left: 50px;
+			padding-right: 0;
+		}
+		.list-timeline li .ic,
+		.list-timeline li:nth-child(odd) .ic {
+			left: 0;
+			right: auto;
+		}
+		.list-timeline li .number,
+		.list-timeline li:nth-child(odd) .number {
+			display: none;
+		}
+	}
+
+	/* == skill charts == */
+	.skill-charts {
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		margin: 0;
+		padding: 40px 0;
+		text-align: center;
+	}
+
+	.skill-charts li {
+		flex: 1 1 25%;
+		box-sizing: border-box;
+		padding: 20px 0;
+	}
+
+	.chart {
+		--ring-color: #000000;
+		--track-color: #ebebeb;
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 110px;
+		height: 110px;
+		border-radius: 50%;
+		margin-bottom: 16px;
+		background: conic-gradient(
+			var(--ring-color) calc(var(--percent) * 1%),
+			var(--track-color) calc(var(--percent) * 1%)
+		);
+	}
+
+	.resume-section.dark .chart {
+		--ring-color: #ffffff;
+		--track-color: #1e1e1e;
+	}
+
+	.chart:before {
+		content: '';
+		position: absolute;
+		inset: 8px;
+		border-radius: 50%;
+	}
+
+	.resume-section.light .chart:before {
+		background: #ffffff;
+	}
+
+	.resume-section.dark .chart:before {
+		background: #323232;
+	}
+
+	.chart .percent {
+		position: relative;
+		z-index: 1;
+		font-weight: 700;
+	}
+
+	.chart .percent:after {
+		content: '%';
+		margin-left: 0.1em;
+		font-size: 0.8em;
+	}
+
+	.resume-section.light .chart .percent {
+		color: #000000;
+	}
+
+	.resume-section.dark .chart .percent {
+		color: #ffffff;
+	}
+
+	.skill-charts .label {
+		text-transform: uppercase;
+	}
+
+	.resume-section.light .skill-charts .label {
+		color: #000000;
+	}
+
+	.resume-section.dark .skill-charts .label {
+		color: #ffffff;
+	}
+
+	@media (max-width: 768px) {
+		.skill-charts li {
+			flex: 1 1 50%;
+		}
+	}
+
+	/* == more skills == */
+	.title-border {
+		text-align: center;
+		padding: 30px;
+		border-top: 1px solid #ebebeb;
+		border-bottom: 1px solid #ebebeb;
+	}
+
+	.resume-section.dark .title-border {
+		border-color: #1e1e1e;
+	}
+
+	.title-border h5 {
+		margin: 0;
+	}
+
+	.resume-section.light .title-border h5 {
+		color: #000000;
+	}
+
+	.resume-section.dark .title-border h5 {
+		color: #ffffff;
+	}
+
+	.more-skills {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 40px;
+		padding: 30px 0;
+	}
+
+	.list-progress {
+		flex: 1 1 300px;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.list-progress li {
+		padding: 20px 0;
+	}
+
+	.list-progress .title {
+		margin-bottom: 10px;
+		text-transform: uppercase;
+	}
+
+	.resume-section.light .list-progress .title {
+		color: #000000;
+	}
+
+	.resume-section.dark .list-progress .title {
+		color: #ffffff;
+	}
+
+	.progress-line {
+		background: #fafafa;
+		border: 1px solid #ebebeb;
+		padding: 5px;
+	}
+
+	.resume-section.dark .progress-line {
+		background: #282828;
+		border-color: #1e1e1e;
+	}
+
+	.progress-line .line {
+		height: 3px;
+		background: #000000;
+	}
+
+	.resume-section.dark .progress-line .line {
+		background: #ffffff;
+	}
+
+	/* == cv actions == */
+	.cv-actions {
+		display: flex;
+		justify-content: center;
+		gap: 15px;
+		flex-wrap: wrap;
+		padding: 40px 15px 60px;
+	}
+
+	.btn-outline {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		min-width: 151px;
+		justify-content: center;
+		padding: 13px;
+		border: 3px solid #ebebeb;
+		font-weight: 700;
+		text-transform: uppercase;
+		font-size: 12px;
+		letter-spacing: 1px;
+		text-decoration: none;
+		transition: all 0.3s ease;
+	}
+
+	.resume-section.light .btn-outline {
+		color: #000000;
+	}
+
+	.resume-section.dark .btn-outline {
+		color: #ffffff;
+		border-color: #1e1e1e;
+	}
+
+	.resume-section.light .btn-outline:hover {
+		background: #000000;
+		border-color: #000000;
+		color: #ffffff;
+	}
+
+	.resume-section.dark .btn-outline:hover {
+		background: #ffffff;
+		border-color: #ffffff;
+		color: #000000;
+	}
+</style>
+
+<script>
+	document.querySelectorAll<HTMLAnchorElement>('.print-btn').forEach((btn) => {
+		btn.addEventListener('click', (e) => {
+			e.preventDefault();
+			window.print();
+		});
+	});
+</script>

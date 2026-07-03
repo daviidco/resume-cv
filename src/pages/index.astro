@@ -9,9 +9,121 @@
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Paulo Cordoba - Software Engineer</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,800" rel="stylesheet" />
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<div class="wrapper">
+			<a class="side light" href="/white">
+				<div class="inner">
+					<div class="box-line">Who I Am</div>
+					<h4 class="font-alt">White Version</h4>
+				</div>
+			</a>
+			<a class="side dark" href="/black">
+				<div class="inner">
+					<div class="box-line">Who I Am</div>
+					<h4 class="font-alt">Black Version</h4>
+				</div>
+			</a>
+		</div>
 	</body>
 </html>
+
+<style is:global>
+	body {
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		line-height: 2;
+		font-size: 13px;
+		background-image: url('/images/hero-mountains.jpg');
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-attachment: fixed;
+		font-family: 'Open Sans', sans-serif;
+	}
+
+	.font-alt {
+		font-family: Georgia, serif;
+	}
+
+	.wrapper {
+		position: relative;
+		width: 100%;
+		height: 100vh;
+	}
+
+	.side {
+		position: fixed;
+		width: 50%;
+		top: 0;
+		text-align: center;
+		height: 100%;
+		display: block;
+		text-decoration: none;
+		transition: background 0.8s ease 0s;
+	}
+
+	@media (max-width: 600px) {
+		.side {
+			position: relative;
+			height: 300px;
+			width: 100%;
+		}
+	}
+
+	.side.light {
+		left: 0;
+		color: #000000;
+		background: rgba(255, 255, 255, 0.7);
+	}
+
+	.side.light:hover {
+		background: #ffffff;
+	}
+
+	.side.dark {
+		right: 0;
+		color: #ffffff;
+		background: rgba(0, 0, 0, 0.7);
+	}
+
+	.side.dark:hover {
+		background: #323232;
+	}
+
+	.inner {
+		position: absolute;
+		top: 50%;
+		text-align: center;
+		width: 100%;
+		height: 200px;
+		padding-top: 55px;
+		margin-top: -100px;
+	}
+
+	.box-line {
+		border: 3px solid #000000;
+		color: #000000;
+		letter-spacing: 2px;
+		padding: 16px 40px;
+		display: inline-block;
+		margin-bottom: 24px;
+		text-transform: uppercase;
+		font-weight: 700;
+		font-size: 20px;
+	}
+
+	.side.dark .box-line {
+		border: 3px solid #ffffff;
+		color: #ffffff;
+	}
+
+	h4 {
+		margin: 0;
+		font-size: 28px;
+	}
+</style>

@@ -1,0 +1,395 @@
+---
+interface Props {
+	theme?: 'light' | 'dark';
+}
+
+const { theme = 'light' } = Astro.props;
+---
+
+<div class={`menu-area ${theme}`} id="site-nav">
+	<div class="toogle-bars">
+		<a href="#menu-collapse" class="collapsed" id="menu-toggle">
+			<i class="fa fa-bars ic-open"></i> <i class="fa fa-remove ic-close"></i> MENU
+		</a>
+	</div>
+	<div class="menu-collapse collapse" id="menu-collapse">
+		<div class="nav-row">
+			<div class="nav-col">
+				<ul class="breadcrumb main-nav no-space">
+					<li><a href="#contact" id="hireme-tab"><i class="fa fa-briefcase"></i> Hire Me Now</a></li>
+				</ul>
+			</div>
+			<div class="nav-col">
+				<ul class="breadcrumb main-nav nav">
+					<li class="active"><a href="#home">Home</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#resume">Resume</a></li>
+					<!-- Hidden until implemented: Portfolio, Blog -->
+					<li><a href="#contact" id="contact-tab">Contact</a></li>
+				</ul>
+			</div>
+			<div class="nav-col">
+				<ul class="breadcrumb main-nav no-space">
+					<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+					<li><a href="#"><i class="fa fa-google"></i></a></li>
+					<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+					<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+					<li><a href="#"><i class="fa fa-github"></i></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	/*== NAVBAR ==*/
+	.menu-area {
+		position: absolute;
+		transition: background 0.8s ease 0s;
+		-webkit-transition: background 0.8s ease 0s;
+		-moz-transition: background 0.8s ease 0s;
+		-o-transition: background 0.8s ease 0s;
+		-ms-transition: background 0.8s ease 0s;
+		bottom: 0;
+		padding: 10px 0;
+		background: #ffffff;
+		background: rgba(255, 255, 255, 0.3);
+		left: 0;
+		border-bottom: 1px solid #ebebeb;
+		text-align: center;
+		width: 100%;
+		z-index: 100;
+	}
+	.menu-area .toogle-bars {
+		display: none;
+	}
+	.menu-area .toogle-bars a {
+		text-decoration: none;
+		color: #000000;
+	}
+	.menu-area .toogle-bars a .ic-open {
+		display: none;
+		visibility: hidden;
+	}
+	.menu-area .toogle-bars a .ic-close {
+		display: inline;
+		visibility: visible;
+	}
+	.menu-area .toogle-bars a.collapsed .ic-open {
+		display: inline;
+		visibility: visible;
+	}
+	.menu-area .toogle-bars a.collapsed .ic-close {
+		display: none;
+		visibility: hidden;
+	}
+	.menu-area .main-nav {
+		visibility: visible !important;
+		margin: 0;
+		background: transparent;
+		list-style: none;
+	}
+	.menu-area .main-nav > li {
+		display: inline;
+	}
+	.menu-area .main-nav > li > a {
+		font-weight: 700;
+		color: #323232;
+		outline: none;
+		font-size: 12px;
+		transition: all 0.3s ease 0s;
+		-webkit-transition: all 0.3s ease 0s;
+		-moz-transition: all 0.3s ease 0s;
+		-o-transition: all 0.3s ease 0s;
+		-ms-transition: all 0.3s ease 0s;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+	.menu-area .main-nav > li > a:hover {
+		color: #000000;
+		outline: none;
+	}
+	.menu-area .main-nav > li + li:before {
+		content: "/\00a0";
+		padding: 0 4px;
+		color: #323232;
+	}
+	.menu-area .main-nav > li.active > a {
+		color: #000000;
+	}
+	.menu-area .main-nav.nav > li > a {
+		padding: 0;
+		display: inline-block;
+	}
+	.menu-area .main-nav.nav > li > a:hover,
+	.menu-area .main-nav.nav > li > a:focus {
+		background: transparent;
+	}
+	.menu-area .main-nav.no-space > li + li:before {
+		content: "";
+		padding: 0;
+	}
+	.menu-area.nav-white-bg {
+		border-bottom: 1px solid #ebebeb;
+		background: #ffffff;
+	}
+	.menu-area.nav-white-bg .main-nav > li > a {
+		color: #7d7d7d;
+	}
+	.menu-area.nav-white-bg .main-nav > li > a:hover {
+		color: #000000;
+	}
+	.menu-area.nav-white-bg .main-nav > li.active > a {
+		color: #000000;
+	}
+	.menu-area.nav-white-bg .main-nav > li + li:before {
+		color: #ebebeb;
+	}
+	.menu-area.nav-fixed {
+		position: fixed;
+		top: 0;
+		background: #ffffff;
+		z-index: 100;
+		bottom: inherit;
+		border-bottom: 1px solid #ebebeb;
+	}
+	@media (min-width: 1030px) {
+		.menu-area .menu-collapse.collapse {
+			display: block;
+			height: auto !important;
+		}
+	}
+	@media (max-width: 1030px) {
+		.menu-area {
+			border-bottom: 1px solid #ebebeb;
+			background: #ffffff;
+		}
+		.menu-area .main-nav > li > a {
+			color: #7d7d7d;
+		}
+		.menu-area .main-nav > li > a:hover {
+			color: #000000;
+		}
+		.menu-area .main-nav > li.active > a {
+			color: #000000;
+		}
+		.menu-area .main-nav > li + li:before {
+			color: #ebebeb;
+		}
+		.menu-area .toogle-bars {
+			display: block;
+			padding: 4px 0;
+		}
+		.menu-area .menu-collapse.collapse {
+			display: none;
+			height: 0;
+			overflow: hidden;
+		}
+		.menu-area .menu-collapse.collapse.in {
+			border-top: 1px solid #ebebeb;
+			margin-top: 10px;
+			display: block;
+			height: auto;
+		}
+		.menu-area .nav-row {
+			flex-direction: column;
+			gap: 10px;
+		}
+	}
+
+	/*== NAVBAR (dark skin) ==*/
+	.menu-area.dark {
+		background: #000000;
+		background: rgba(0, 0, 0, 0.3);
+		border-bottom: 1px solid #1e1e1e;
+	}
+	.menu-area.dark .toogle-bars a {
+		color: #ffffff;
+	}
+	.menu-area.dark .main-nav > li > a {
+		color: #cdcdcd;
+	}
+	.menu-area.dark .main-nav > li > a:hover {
+		color: #ffffff;
+		outline: none;
+	}
+	.menu-area.dark .main-nav > li + li:before {
+		color: #323232;
+	}
+	.menu-area.dark .main-nav > li.active > a {
+		color: #ffffff;
+	}
+	.menu-area.dark.nav-white-bg {
+		border-bottom: 1px solid #1e1e1e;
+		background: #323232;
+	}
+	.menu-area.dark.nav-white-bg .main-nav > li > a {
+		color: #7d7d7d;
+	}
+	.menu-area.dark.nav-white-bg .main-nav > li > a:hover {
+		color: #ffffff;
+	}
+	.menu-area.dark.nav-white-bg .main-nav > li.active > a {
+		color: #ffffff;
+	}
+	.menu-area.dark.nav-white-bg .main-nav > li + li:before {
+		color: #1e1e1e;
+	}
+	.menu-area.dark.nav-fixed {
+		background: #323232;
+		z-index: 100;
+		bottom: inherit;
+		border-bottom: 1px solid #1e1e1e;
+	}
+	@media (max-width: 1030px) {
+		.menu-area.dark {
+			border-bottom: 1px solid #1e1e1e;
+			background: #323232;
+		}
+		.menu-area.dark .main-nav > li > a {
+			color: #7d7d7d;
+		}
+		.menu-area.dark .main-nav > li > a:hover {
+			color: #ffffff;
+		}
+		.menu-area.dark .main-nav > li.active > a {
+			color: #ffffff;
+		}
+		.menu-area.dark .main-nav > li + li:before {
+			color: #1e1e1e;
+		}
+		.menu-area.dark .menu-collapse.collapse.in {
+			border-top: 1px solid #1e1e1e;
+		}
+	}
+
+	/*== structural helpers (not part of the original skin CSS) ==*/
+	.nav-row {
+		max-width: 1140px;
+		margin: 0 auto;
+		padding: 0 20px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.nav-col .main-nav.no-space li {
+		margin: 0 6px;
+	}
+
+	/* bootstrap .breadcrumb defaults (original relies on Bootstrap 3.3.1) */
+	.breadcrumb {
+		padding: 8px 15px;
+		margin: 0;
+		list-style: none;
+	}
+</style>
+
+<script>
+	function initMenuToggle() {
+		const nav = document.getElementById('site-nav');
+		const toggle = document.getElementById('menu-toggle');
+		const collapse = document.getElementById('menu-collapse');
+		if (!nav || !toggle || !collapse) return;
+
+		toggle.addEventListener('click', (e) => {
+			e.preventDefault();
+			const isOpen = collapse.classList.toggle('in');
+			toggle.classList.toggle('collapsed', !isOpen);
+		});
+	}
+
+	function initInPageLinks() {
+		const nav = document.getElementById('site-nav') as HTMLElement | null;
+		const toggle = document.getElementById('menu-toggle');
+		const collapse = document.getElementById('menu-collapse');
+		if (!nav) return;
+
+		nav.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => {
+			link.addEventListener('click', (e) => {
+				const hash = link.getAttribute('href');
+				if (!hash || hash.length < 2) return;
+				const target = document.querySelector(hash) as HTMLElement | null;
+				if (!target) return;
+
+				e.preventDefault();
+				const top = target.getBoundingClientRect().top + window.scrollY - (nav.offsetHeight - 1);
+				window.scrollTo({ top, behavior: 'smooth' });
+
+				if (collapse?.classList.contains('in')) {
+					collapse.classList.remove('in');
+					toggle?.classList.add('collapsed');
+				}
+			});
+		});
+	}
+
+	function initScrollSpy() {
+		const nav = document.getElementById('site-nav') as HTMLElement | null;
+		if (!nav) return;
+
+		const links = Array.from(nav.querySelectorAll<HTMLAnchorElement>('.main-nav.nav > li > a'));
+		const targets = links
+			.map((link) => {
+				const hash = link.getAttribute('href');
+				const el = hash ? (document.querySelector(hash) as HTMLElement | null) : null;
+				return { li: link.parentElement as HTMLElement, el };
+			})
+			.filter((t): t is { li: HTMLElement; el: HTMLElement } => t.el !== null);
+
+		if (targets.length === 0) return;
+
+		const SPY_OFFSET = 200;
+
+		function update() {
+			const scrollPos = window.scrollY + SPY_OFFSET;
+			const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+
+			let activeIndex = 0;
+			targets.forEach((t, i) => {
+				if (t.el.offsetTop <= scrollPos) activeIndex = i;
+			});
+			if (atBottom) activeIndex = targets.length - 1;
+
+			targets.forEach((t, i) => {
+				t.li.classList.toggle('active', i === activeIndex);
+			});
+		}
+
+		window.addEventListener('scroll', update, { passive: true });
+		window.addEventListener('resize', update);
+		update();
+	}
+
+	function initMenuScroll() {
+		const nav = document.getElementById('site-nav') as HTMLElement | null;
+		const header = document.querySelector('.main-header') as HTMLElement | null;
+		if (!nav || !header) return;
+
+		function update() {
+			const mainBottom = header!.offsetTop + header!.offsetHeight;
+			const stopWindow = Math.round(window.scrollY) + nav!.offsetHeight;
+
+			if (stopWindow > mainBottom) {
+				nav!.classList.add('nav-fixed');
+			} else {
+				nav!.classList.remove('nav-fixed', 'nav-white-bg');
+			}
+
+			if (stopWindow > nav!.offsetHeight) {
+				nav!.classList.add('nav-white-bg');
+			}
+
+			document.documentElement.style.scrollPaddingTop = `${nav!.offsetHeight}px`;
+		}
+
+		window.addEventListener('scroll', update, { passive: true });
+		window.addEventListener('resize', update);
+		update();
+	}
+
+	initMenuToggle();
+	initInPageLinks();
+	initMenuScroll();
+	initScrollSpy();
+</script>
