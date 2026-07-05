@@ -305,6 +305,7 @@ const { theme = 'light' } = Astro.props;
 		if (!nav) return;
 
 		nav.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => {
+			if (link.id === 'menu-toggle') return;
 			link.addEventListener('click', (e) => {
 				const hash = link.getAttribute('href');
 				if (!hash || hash.length < 2) return;
